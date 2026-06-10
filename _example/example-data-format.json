@@ -1,0 +1,34 @@
+{
+  "header": {
+    "project-id": "iDriving",
+    "use-case-id": "UC1.1",
+    "message-type": "object-detection-event",
+    "producer-id": "partner.component.t4.1",
+    "correlation-id": "550e8400-e29b-41d4-a716-446655440000",
+    "message-timestamp": "2026-05-19T08:30:00Z",
+    "schema-version": "1.0"
+  },
+  "records": [
+    {
+      "record-id": "rec-0001",
+      "timestamp": "2026-05-19T08:30:00Z",
+      "location": {
+        "lat": 40.6401,
+        "lon": 22.9444,
+        "road-id": "OSM:111440370"
+      },
+      "event": {
+        "type": "seatbelt-violation",
+        "confidence": 0.93,
+        "attributes": {
+          "lane": 2,
+          "plate": "ABC-1234"
+        }
+      },
+      "media": {
+        "claim-check-uri": "s3://idriving/violations/2026-05-19/rec-0001.jpg",
+        "content-type": "image/jpeg"
+      }
+    }
+  ]
+}
