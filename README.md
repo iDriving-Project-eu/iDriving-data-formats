@@ -25,7 +25,7 @@ real, linkable payloads instead of inline snippets.
 | Task | Component | Lead partner |
 |---|---|---|
 | T3.2 | Route Guidance & Signal Control Tools | MBL |
-| T3.3 | Mobile & In-Vehicle Application | MBL (consumer-only) |
+| T3.3 | Mobile & In-Vehicle Application | Simavi (consumer-only) |
 | T3.4 | Aerial Surveillance UAV System | ACCELI |
 | T3.5 | Autonomous UAV Deployment for Area Coverage | CERTH |
 | T4.1 | Edge Detection Tools | CERTH |
