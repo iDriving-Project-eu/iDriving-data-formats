@@ -1,0 +1,27 @@
+{
+    records [
+        {
+            value {
+  records [
+    {
+      header {
+        project-id iDriving,
+        use-case-id UC2.1,
+        contentType applicationjson,
+        message-type maintenance_zone,
+        producer-id SIMAVI,
+        correlation-id 2c28a3c6-19b6-4961-b898-2dee637101e3,
+        message-timestamp 2026-06-25T134856.100732
+      },
+      body {
+          lat 44.426765,
+          lon 26.102537,
+          rad 2,
+          message Caution Road work ahead.
+      }
+    }
+  ]
+}
+        }
+    ]
+}
