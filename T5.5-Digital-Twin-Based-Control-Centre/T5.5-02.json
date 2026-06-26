@@ -1,0 +1,22 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC2.2",
+        "contentType": "application/json",
+        "message-type": "idriving_simavi_vms_uc2.2",
+        "producer-id": "Simavi",
+        "correlation-id": "1f36b1f0-f369-4831-a8f2-52bf5cd39321",
+        "message-timestamp": "2026-06-26T13:47:40.9409565Z"
+      },
+      "body": {
+        "alerts": [
+          {
+            "label": "A trash bin has been detected blocking the road."
+          }
+        ]
+      }
+    }
+  ]
+}
