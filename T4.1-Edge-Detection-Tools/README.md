@@ -75,5 +75,78 @@ One entry per exported frame.
 **`imageURL`:** `images/<run_folder>/frame_NNNNNN.jpg` — JPEG, quality 80, max width 1280 px.
 
 ---
+**iDriving components:** IC9
+
+## count_vehicles — Vehicle count data format
+
+Reference payload for interface **T4.1-02**: `T4.1-02.json`.  
+Not a strict schema — illustrates structure and naming for the CERTH `count_vehicles` tool (IC9).
+
+Detects and tracks Bus, Car, Motorbike, Truck (YOLOv11 + ByteTrack) and publishes vehicle counts. All classes aggregate into `vehicles` / `total`; `motorbikes` is currently always `0`.
+
+---
+
+## Message envelope
+
+**Topic (T4.1-02):** `idriving_certh_countcars_detectiontool_uc1.1`  
+**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
+
+Payload: top-level `header` + `body` (not wrapped in `records[]`).
+
+### Kafka headers & `header`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `project-id` | `iDriving` | Project identifier |
+| `use-case-id` | `UC1.1` | Use-case scope |
+| `message-type` | `uc1.1_vehicle_count` | Event type / schema |
+| `producer-id` | `CERTH` | Producing component |
+| `correlation-id` | `a1b2c3d4-...` | Distributed tracing (UUID) |
+| `message-timestamp` | `2026-03-02T22:12:41+00:00` | Producer UTC timestamp (ISO 8601) |
+| `content-type` / `contentType` | `application/json` | Payload format |
+
+---
+
+## Payload — `body`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `topicName` | `idriving_certh_countcars_detectiontool_uc1.1` | Target Kafka topic |
+| `frameID` | `150` or `"000120-000270"` | Frame number (int) or frame range (string) |
+| `counts` | `{ vehicles, motorbikes, total }` | Vehicle count metrics |
+| `imageURL` | *(optional)* | MinIO/S3 frame URI (claim-check) |
+| `videoURL` | *(optional)* | MinIO/S3 video clip URI (claim-check) |
+
+### `counts`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `vehicles` | `12` | Tracked vehicles in scope |
+| `motorbikes` | `0` | Reserved (always `0` currently) |
+| `total` | `12` | `vehicles` + `motorbikes` |
+
+**Publish policy:** only when `total > 0`. Default mode: snapshot per frame, max once every `--mf` s (default 5). With `--upload-video`: unique track IDs per 5 s segment, one message per clip with `videoURL`.
+
+---
+
+## Heartbeat
+
+**Topic:** `idriving.heartbeat.certh.count_cars` — every 30 s with `--kafka`.
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `component_id` | `idriving.heartbeat.certh.count_cars` | Component identifier |
+| `timestamp` | `2026-03-02T22:12:41+00:00` | UTC timestamp (ISO 8601) |
+| `status` | `UP` | Health status |
+| `version` | `1.0.0` | Tool version |
+
+---
+
+## How to use this folder
+
+1. Use `T4.1-02.json` as the reference for interface T4.1-02 (IC9).
+2. Keep envelope fields, topic pattern, and `counts` structure consistent.
+3. Place below the `detect_violation` (T4.1-01) section in the T4.1 repo.
+
 
 
