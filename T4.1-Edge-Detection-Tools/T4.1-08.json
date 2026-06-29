@@ -1,34 +1,39 @@
 {
-  "header": {
-    "project-id": "iDriving",
-    "use-case-id": "UC2.1",
-    "contentType": "application/json",
-    "message-type": "uc2.1_vehicle_violation",
-    "producer-id": "CERTH",
-    "correlation-id": "b4c5d6e7-f8a9-0123-bcde-f45678901234",
-    "message-timestamp": "2026-06-29T14:30:22.456789+00:00"
-  },
-  "body": {
-    "topicName": "idriving_certh_object_detection_uc2.1",
-    "frameID": 245,
-    "violations": [
-      {
-        "track_id": 3,
-        "class": "Car",
-        "score": 0.872,
-        "bbox": [
-          412.3,
-          180.5,
-          598.7,
-          340.2
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC2.2",
+        "contentType": "application/json",
+        "message-type": "idriving_certh_uc2.2_obstacle_detection",
+        "producer-id": "CERTH",
+        "correlation-id": "41f92162-aa17-46c0-bd16-31b50ae7233c",
+        "message-timestamp": "2026-05-29T09:01:03.360980Z"
+      },
+      "body": {
+        "detection_list": [
+          {
+            "topicName": "idriving_certh_object_detection_uc2.2",
+            "frameID": 142,
+            "imageURL": "https://157.90.19.188:9000/uc2.2-certh-obstacle-detection/images_2026.5.29-12_1_1/frames/frame_000142.jpg",
+            "longitude": 23.77,
+            "latitude": 38.15,
+            "altitude": 48.8,
+            "detections": [
+              {
+                "objectID": 1,
+                "class": "Fallen Tree",
+                "confidence": "63.3%"
+              },
+              {
+                "objectID": 2,
+                "class": "Rocks",
+                "confidence": "71.8%"
+              }
+            ]
+          }
         ]
       }
-    ],
-    "telemetry": {
-      "lat": 45.4923,
-      "lon": 15.5558,
-      "alt": 170.4
-    },
-    "imageURL": "https://157.90.19.188:9000/uc2.1-certh-vehicle-detection/vehicle_detection_2026.6.29-14_30_15/frames/violation_000245_track_3.jpg"
-  }
+    }
+  ]
 }
