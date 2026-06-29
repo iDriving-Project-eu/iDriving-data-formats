@@ -127,24 +127,76 @@ Payload: top-level `header` + `body` (not wrapped in `records[]`).
 
 ---
 
-## Heartbeat
+## IC10.1 - UC1.2 — Illegal parking on bike lane
 
-**Topic:** `idriving.heartbeat.certh.count_cars` — every 30 s with `--kafka`.
+Reference payload for interface **T4.1-03**: `T4.1-03.json`.  
+Not a strict schema — illustrates structure and naming for the CERTH `detect_illegal_parking` tool.
 
-| Field | Example | Purpose |
-|-------|---------|---------|
-| `component_id` | `idriving.heartbeat.certh.count_cars` | Component identifier |
-| `timestamp` | `2026-03-02T22:12:41+00:00` | UTC timestamp (ISO 8601) |
-| `status` | `UP` | Health status |
-| `version` | `1.0.0` | Tool version |
+Combines YOLOv8 bike-lane segmentation + vehicle detection + ByteTrack. Flags vehicles parked on bike lanes when overlap with the lane mask exceeds the configured threshold.
+
+| `condition` | Description | `class` |
+|-------------|-------------|---------|
+| `Illegal Parking` | Vehicle overlapping bike lane | `Vehicle` |
 
 ---
 
-## How to use this folder
+## Message envelope
 
-1. Use `T4.1-02.json` as the reference for interface T4.1-02 (IC9).
-2. Keep envelope fields, topic pattern, and `counts` structure consistent.
-3. Place below the `detect_violation` (T4.1-01) section in the T4.1 repo.
+Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
+
+**Topic (T4.1-03):** `idriving_certh_object_detection_uc1.2`  
+**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
+
+### Kafka headers & `records[].header`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `project-id` | `iDriving` | Project identifier |
+| `use-case-id` | `UC1.2` | Use-case scope |
+| `message-type` | `idriving_certh_uc1.2_illegal_parking_detection` | Event type / schema |
+| `producer-id` | `CERTH` | Producing component |
+| `correlation-id` | `cb5469d6-6708-47bd-b7a6-9ef49aa7ff98` | Distributed tracing (UUID) |
+| `message-timestamp` | `2026-06-29T12:25:54.561204Z` | Producer UTC timestamp (ISO 8601) |
+| `content-type` / `contentType` | `application/json` | Payload format |
+
+---
+
+## Payload — `body.detection_list[]`
+
+One entry per exported frame.
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `topicName` | `idriving_certh_object_detection_uc1.2` | Target Kafka topic |
+| `frameID` | `144` | Frame number in input stream |
+| `imageURL` | `""` or MinIO/static URI | Claim-check frame URI; empty if no upload configured |
+| `detections` | `[ ... ]` | Vehicle records for this frame |
+
+**Publish policy:** only when at least one vehicle has `violation: true` (overlap with bike lane ≥ threshold, default 20%).
+
+---
+
+## `detections[]`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `objectID` | `1` | ByteTrack ID (stable per vehicle across frames) |
+| `class` | `Vehicle` | Always `Vehicle` for illegal parking events |
+| `vehicle_conf` | `84.5%` | Vehicle detector confidence (percentage string) |
+| `violation` | `true` | `true` if vehicle overlaps bike lane above threshold |
+| `condition` | `Illegal Parking` | Violation type when `violation` is `true`; otherwise `null` |
+| `violation_conf` | `22.8%` | Bike-lane overlap ratio as percentage (not a separate classifier score) |
+| `license_plate` | `AB-123-CD` | OCR result; `null` if OCR failed; omitted if no plate |
+
+**`violation_conf`:** computed as `(vehicle ∩ bike_lane) / vehicle_area × 100`. Compared against `overlap_thres` in config (default `0.2` = 20%).
+
+**`imageURL`:** MinIO presigned URL with `--upload-frames`, static server URL if configured, or `""` when only saving JSON locally.
+
+**`license_plate`:** optional OCR (format configurable via `--lp-format`, default `FR`).
+
+---
+
+
 
 
 
