@@ -196,7 +196,218 @@ One entry per exported frame.
 
 ---
 
+#### UC1.2 — IC10.2 - Sign occlusion detection
+
+Reference payload for interface **T4.1-04**: `T4.1-04.json`.  
+Not a strict schema — illustrates structure and naming for the CERTH `sign_occlusion` tool.
+
+Detects vehicles (YOLO + ByteTrack), compares each vehicle bbox against a user-defined sign ROI, and publishes Kafka messages when overlap with the sign exceeds the configured threshold.
+
+| `condition` | Description | `class` |
+|-------------|-------------|---------|
+| `sign obstruction` | Vehicle blocking / occluding the traffic sign | `Vehicle` |
+
+---
+
+## Message envelope
+
+Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
+
+**Topic (T4.1-04):** `idriving_certh_object_detection_uc1.2`  
+**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
+
+### Kafka headers & `records[].header`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `project-id` | `iDriving` | Project identifier |
+| `use-case-id` | `UC1.2` | Use-case scope |
+| `message-type` | `idriving_certh_object_detection_uc1.2` | Event type / schema |
+| `producer-id` | `CERTH` | Producing component |
+| `correlation-id` | `ca4da452-07eb-4916-8929-1c9ec2ff4071` | Distributed tracing (UUID) |
+| `message-timestamp` | `2026-03-05T08:51:48.422206+00:00` | Producer UTC timestamp (ISO 8601) |
+| `content-type` / `contentType` | `application/json` | Payload format |
+
+---
+
+## Payload — `body.detection_list[]`
+
+One entry per exported frame.
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `topicName` | `idriving_certh_object_detection_uc1.2` | Target Kafka topic |
+| `frameID` | `602` | Frame number in input stream |
+| `imageURL` | `sign_occlusion_2026-3-5_10:51:30/frames/frame_000602.jpg` | MinIO relative path or presigned URI |
+| `detections` | `[ ... ]` | Sign-occlusion records for this frame |
+
+**Publish policy:** only when at least one vehicle overlaps the sign ROI ≥ `overlap_threshold_percent` (default: 30%). Only blocking vehicles are included in `detections`.
+
+---
+
+## `detections[]`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `objectID` | `1` | ByteTrack ID (stable per vehicle across frames) |
+| `class` | `Vehicle` | Detected vehicle class |
+| `vehicle_conf` | `94.9%` | Vehicle detector confidence (percentage string) |
+| `violation` | `true` | Always `true` in exported T4.1-04 messages |
+| `condition` | `sign obstruction` | Occlusion violation type |
+| `violation_conf` | `100.0%` | Sign ROI overlap as percentage (`vehicle ∩ sign / sign area × 100`) |
+| `license_plate` | `ZIA-5163` | OCR result; empty string `""` if no plate read |
+
+**`violation_conf`:** overlap ratio between vehicle bbox and sign ROI, not a separate classifier score. Alert fires when `violation_conf` ≥ threshold (default 30%).
+
+**`imageURL`:** relative MinIO path (`<run_folder>/frames/frame_NNNNNN.jpg`) or presigned URL with `--upload`.
+
+**`license_plate`:** optional OCR on plate detections inside the blocking vehicle bbox.
+
+---
+
+**Use case:** UC1.2 — IC11.1 - Helmet & mobile violation detection
+
+Reference payload for interface **T4.1-05**: `T4.1-05.json`.  
+Not a strict schema — illustrates structure and naming for the CERTH `detect_helmet-mobile` tool.
+
+Detects cyclists and motorcyclists (YOLO + ByteTrack) and flags helmet and mobile-phone violations. Frames are stored in MinIO and referenced via `imageURL` (claim-check pattern).
+
+| `condition` | Description | Typical `class` |
+|-------------|-------------|-----------------|
+| `No-Helmet` | Rider without helmet | `Motorcyclist`, `Cyclist` |
+| `smartphone_usage` | Mobile phone use while riding | `Motorcyclist`, `Cyclist` |
+| `No-Helmet+smartphone_usage` | Both violations on the same rider | `Motorcyclist`, `Cyclist` |
+
+> Internal model label `Mobile` is mapped to `smartphone_usage` in exported messages. Multiple simultaneous violations are joined with `+`.
+
+---
+
+## Message envelope
+
+Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
+
+**Topic (T4.1-05):** `idriving_certh_object_detection_uc1.2`  
+**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
+
+### Kafka headers & `records[].header`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `project-id` | `iDriving` | Project identifier |
+| `use-case-id` | `UC1.2` | Use-case scope |
+| `message-type` | `idriving_certh_uc1.2_helmet_mobile_detection` | Event type / schema |
+| `producer-id` | `CERTH` | Producing component |
+| `correlation-id` | `1f4abbee-0924-43b1-b1f1-bca712ac88f2` | Distributed tracing (UUID) |
+| `message-timestamp` | `2026-03-03T11:33:48.664140+00:00` | Producer UTC timestamp (ISO 8601) |
+| `content-type` / `contentType` | `application/json` | Payload format |
+
+---
+
+## Payload — `body.detection_list[]`
+
+One entry per exported frame.
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `topicName` | `idriving_certh_object_detection_uc1.2` | Target Kafka topic |
+| `frameID` | `102` | Frame number in input stream |
+| `imageURL` | `violation_uc1.2_motorbike-no_helmet-mobile_2026.3.3-13_33_44/frames/frame_000102.jpg` | MinIO relative path or presigned URI |
+| `detections` | `[ ... ]` | Violation records for this frame |
+
+**Publish policy:** only when `violation: true`. Default: export every violation frame (`upload_every_violation_frame: true`). Alternative: first detection per `objectID`, then every N frames (default: 5).
+
+---
+
+## `detections[]`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `objectID` | `1` | ByteTrack ID (stable per rider across frames) |
+| `class` | `Motorcyclist` | `Motorcyclist` or `Cyclist` |
+| `vehicle_conf` | `91.0%` | Rider detector confidence (percentage string) |
+| `violation` | `true` | Always `true` in exported T4.1-05 messages |
+| `condition` | `No-Helmet` | Violation type (see table above) |
+| `violation_conf` | `81.4%` | Violation detector confidence (percentage string) |
+| `license_plate` | `AB-1234` | OCR result; `null` if OCR failed; omitted if no plate |
+
+**`condition` mapping:** `Mobile` → `smartphone_usage`; combined violations use `+` (e.g. `No-Helmet+smartphone_usage`).
+
+**`license_plate`:** may be reused from a previous frame for the same `objectID`. OCR format configurable via `--lp-format`.
+
+**`imageURL`:** MinIO bucket `uc1.2-certh-helmet-mobile-violation` — relative path or presigned URL (JPEG, quality 80, max width 1280 px).
 
 
+
+#### UC1.2 — IC11.2 - Cyclist hand-signal & helmet detection
+
+## cyclist_hand_detection — Cyclist signal violation data format
+
+Reference payload for interface **T4.1-06**: `T4.1-06.json`.  
+Not a strict schema — illustrates structure and naming for the CERTH `cyclist_hand_detection` tool.
+
+Detects cyclists (YOLO + ByteTrack), checks helmet status, and analyses upper-body pose (YOLO-pose) for hand signals during turns. Frames are stored in MinIO and referenced via `imageURL` (claim-check pattern).
+
+| `condition` | `violation` | Description |
+|-------------|-------------|-------------|
+| `No-Helmet` | `true` | Cyclist without helmet |
+| `Helmet` | `false` | Cyclist wearing helmet |
+| `null` | `false` | Cyclist detected, helmet status unknown / not set |
+
+> Hand-signal analysis runs internally (`hand_label`), but **hand-signal violations are not exported** in the current version — only helmet violations set `violation: true`. For full `No-Hand-Signal` / `Wrong-Hand-Signal` export see `uc1.2-cyclist_hand_violation`.
+
+---
+
+## Message envelope
+
+Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
+
+**Topic (T4.1-06):** `idriving_certh_object_tracking_uc1.2`  
+**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
+
+### Kafka headers & `records[].header`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `project-id` | `iDriving` | Project identifier |
+| `use-case-id` | `UC1.2` | Use-case scope |
+| `message-type` | `cyclist_Signal_Violation` | Event type / schema |
+| `producer-id` | `CERTH` | Producing component |
+| `correlation-id` | `cafea1f0-a934-44df-aeb5-c92fc55d7b03` | Distributed tracing (UUID) |
+| `message-timestamp` | `2026-03-03T21:22:23.238038+00:00` | Producer UTC timestamp (ISO 8601) |
+| `content-type` / `contentType` | `application/json` | Payload format |
+
+---
+
+## Payload — `body.detection_list[]`
+
+One entry per exported frame.
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `topicName` | `idriving_certh_object_tracking_uc1.2` | Target Kafka topic |
+| `frameID` | `163` | Frame number in input stream |
+| `imageURL` | `images/test6_run_2026.03.03-23.22.13/frame_000163.jpg` | MinIO relative path or presigned URI |
+| `detections` | `[ ... ]` | Cyclist records for this frame |
+
+**Publish policy:** exports every frame with at least one tracked cyclist when `--kafka`, `--save-json`, or `--upload-*` is enabled. MinIO frame upload requires a non-empty `hand_label` and `--upload-frames`.
+
+---
+
+## `detections[]`
+
+| Field | Example | Purpose |
+|-------|---------|---------|
+| `objectID` | `5` | ByteTrack ID (stable per cyclist across frames) |
+| `class` | `cyclist` | Always `cyclist` |
+| `confidence` | `89.6%` | Cyclist detector confidence (percentage string) |
+| `violation` | `true` | `true` when `condition` is `No-Helmet` |
+| `condition` | `No-Helmet` | Violation / status label (see table above) |
+| `violation_conf` | `89.6%` | Confidence of the violation detection |
+| `bbox` | `[x1, y1, x2, y2]` | Cyclist bounding box in pixel coordinates |
+| `hand_label` | `right hand raised` | Pose-derived hand state (`""` if none); not a violation field |
+
+**`hand_label` values (informational):** `left hand raised`, `right hand raised`, `both hands raised`, or `""`.
+
+**`imageURL`:** MinIO bucket `uc1.2-certh-cyclist-signal` — relative path or presigned URL (JPEG, quality 80, max width 1280 px).
 
 
