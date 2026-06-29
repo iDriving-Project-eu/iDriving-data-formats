@@ -1,0 +1,59 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC1.2",
+        "contentType": "application/json",
+        "message-type": "idriving_certh_object_tracking_uc1.2",
+        "producer-id": "CERTH",
+        "correlation-id": "a3b2c1d0-e5f6-7890-abcd-ef1234567890",
+        "message-timestamp": "2026-06-29T19:22:15.123456+00:00"
+      },
+      "body": {
+        "detection_list": [
+          {
+            "topicName": "idriving_certh_object_tracking_uc1.2",
+            "frameID": 142,
+            "detections": [
+              {
+                "objectID": 1,
+                "class": "Vehicle",
+                "vehicle_conf": "91.2%",
+                "bbox": [
+                  120.5,
+                  80.0,
+                  450.3,
+                  320.7
+                ],
+                "license_plate": "ABC-1234"
+              },
+              {
+                "objectID": 2,
+                "class": "Pedestrian",
+                "vehicle_conf": "87.4%",
+                "bbox": [
+                  520.1,
+                  150.2,
+                  580.6,
+                  410.9
+                ]
+              },
+              {
+                "objectID": 3,
+                "class": "Cyclist",
+                "vehicle_conf": "83.1%",
+                "bbox": [
+                  300.0,
+                  200.5,
+                  380.2,
+                  450.0
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
