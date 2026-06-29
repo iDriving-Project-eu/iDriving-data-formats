@@ -75,9 +75,7 @@ One entry per exported frame.
 **`imageURL`:** `images/<run_folder>/frame_NNNNNN.jpg` — JPEG, quality 80, max width 1280 px.
 
 ---
-**iDriving components:** IC9
-
-## count_vehicles — Vehicle count data format
+## IC9 - Vehicle count data format
 
 Reference payload for interface **T4.1-02**: `T4.1-02.json`.  
 Not a strict schema — illustrates structure and naming for the CERTH `count_vehicles` tool (IC9).
