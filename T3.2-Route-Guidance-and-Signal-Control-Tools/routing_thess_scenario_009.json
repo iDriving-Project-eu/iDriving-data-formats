@@ -1,0 +1,27 @@
+{
+    "alert_info": {
+        "type": "obstacle",
+        "notes": "Leoforos Ochi",
+        "affected_vehicle_types": [
+            "car",
+            "motorcycle",
+            "truck"
+        ],
+        "coordinates": [],
+        "default_alert": "Road Closed ahead! Go back to Ag. Dimitriou str. and enter the highway from Triandria intersection!"
+    },
+    "alternative_routes": [
+        {
+            "veh_type": "car",
+            "start_point": "Όχι",
+            "destination_point": "Περιφερειακή Οδός Θεσσαλονίκης",
+            "new_path": "('Όχι', 'Ελένης Ζωγράφου', 'Ολυμπιάδος', 'Αγίου Δημητρίου', 'Κατσιμίδη', 'Λ. Κυριακίδη', 'Περιφερειακή Οδός Θεσσαλονίκης')"
+        },
+        {
+            "veh_type": "car",
+            "start_point": "Όχι",
+            "destination_point": "Περιφερειακή Οδός Θεσσαλονίκης",
+            "new_path": "('Όχι', 'Ελένης Ζωγράφου', 'Ολυμπιάδος', 'Αγίου Δημητρίου', 'Κατσιμίδη', 'Λ. Κυριακίδη', 'Παράπλευρη Οδός', 'Περιφερειακή Οδός Θεσσαλονίκης')"
+        }
+    ]
+}
