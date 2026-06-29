@@ -1,0 +1,35 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC1.1",
+        "contentType": "application/json",
+        "message-type": "idriving_certh_uc1.1_detection",
+        "producer-id": "CERTH",
+        "correlation-id": "2829dc7f-6553-423c-8a2f-1200e969bb1e",
+        "message-timestamp": "2026-03-02T22:12:41.117082+00:00"
+      },
+      "body": {
+        "detection_list": [
+          {
+            "topicName": "idriving_certh_object_detection_uc1.1",
+            "frameID": 58,
+            "imageURL": "images/violation_nasia_4-mobile_2026.3.3-0:12:35/frame_000058.jpg",
+            "detections": [
+              {
+                "objectID": 1,
+                "class": "Vehicle",
+                "vehicle_conf": "92.7%",
+                "violation": true,
+                "condition": "Mobile",
+                "violation_conf": "51.2%",
+                "license_plate": "HKY-2821"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
