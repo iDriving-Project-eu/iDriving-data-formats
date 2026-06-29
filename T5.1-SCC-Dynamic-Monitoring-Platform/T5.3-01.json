@@ -1,0 +1,74 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "\"UC1.1\"",
+        "contentType": "application/json",
+        "message-type": "violation",
+        "producer-id": "idriving",
+        "correlation-id": "1ef9d1e0-91fd-47a2-bd96-3be46d69b4bf",
+        "message-timestamp": "2026-01-20T15:23:59.882539+00:00"
+      },
+      "body": {
+        "timestamp": "2026-01-20T15:23:59.882555+00:00",
+        "window": {
+          "granularity": "hour",
+          "start": "2025-11-24T22:00:00+00:00",
+          "end": "2025-11-24T22:59:59.999999+00:00",
+          "timezone": "UTC"
+        },
+        "version": "1.0",
+        "site": {
+          "uc_id": "UC1.1",
+          "city": null,
+          "network_id": "iDriving"
+        },
+        "data": [
+          {
+            "road_id": "unknown_road",
+            "scc_domain": "safety",
+            "groups": [
+              {
+                "user": "Vehicle",
+                "metrics": {
+                  "total_vehicles": 14,
+                  "total_violations": 14,
+                  "helmet_violation": 0,
+                  "seatbelt_violation": 9,
+                  "redlight_violation": 5,
+                  "wrong_lane": 0,
+                  "Smartphone Usage": 0
+                }
+              },
+              {
+                "user": "Pedestrian",
+                "metrics": {
+                  "total_vehicles": 0,
+                  "total_violations": 0,
+                  "helmet_violation": 0,
+                  "seatbelt_violation": 0,
+                  "redlight_violation": 0,
+                  "wrong_lane": 0,
+                  "Smartphone Usage": 0
+                }
+              },
+              {
+                "user": "Motorbike",
+                "metrics": {
+                  "total_vehicles": 0,
+                  "total_violations": 0,
+                  "helmet_violation": 0,
+                  "seatbelt_violation": 0,
+                  "redlight_violation": 0,
+                  "wrong_lane": 0,
+                  "Smartphone Usage": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
