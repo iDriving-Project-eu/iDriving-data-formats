@@ -1,0 +1,35 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC1.2",
+        "contentType": "application/json",
+        "message-type": "idriving_certh_uc1.2_helmet_mobile_detection",
+        "producer-id": "CERTH",
+        "correlation-id": "1f4abbee-0924-43b1-b1f1-bca712ac88f2",
+        "message-timestamp": "2026-03-03T11:33:48.664140+00:00"
+      },
+      "body": {
+        "detection_list": [
+          {
+            "topicName": "idriving_certh_object_detection_uc1.2",
+            "frameID": 102,
+            "imageURL": "violation_uc1.2_motorbike-no_helmet-mobile_2026.3.3-13_33_44/frames/frame_000102.jpg",
+            "detections": [
+              {
+                "objectID": 1,
+                "class": "Motorcyclist",
+                "vehicle_conf": "91.0%",
+                "violation": true,
+                "condition": "No-Helmet",
+                "violation_conf": "81.4%",
+                "license_plate": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
