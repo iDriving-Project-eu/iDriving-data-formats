@@ -140,7 +140,7 @@ Combines YOLOv8 bike-lane segmentation + vehicle detection + ByteTrack. Flags ve
 
 ---
 
-## Message envelope
+### Message envelope
 
 Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
 
