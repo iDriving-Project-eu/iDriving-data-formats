@@ -22,9 +22,25 @@ The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json).
 | `message-timestamp` | `2026-05-19T08:30:00Z` | Producer-side UTC timestamp of the message. |
 | `content-type` | `application/json` | Declares the payload format. |
 
-## Record contents 
+### Record contents: 
+
+#### alert_info{}: 
+| Header key | Example | Purpose |
+|---|---|---|
+| `type` | `"obstacle"` | Identifies the type of incident/alert (e.g. 'obstacle','traffic','accident' etc.) |
+| `notes` | `"Leoforos Ochi"` | Identifies the name of the street where the incident takes place. | 
+| `coordinates` | `["12346678","12345678"] ` | Identifies the latitude and longitude of the incident location (if localized). |
+| `default_alert` | `"Road Closed ahead! Enter the highway from Triandria intersection!"` | Identifies the preset warning message related to the specific incident/alert with general routing advice. |
+| `affected_vehicle_types` | `[“car”, “motorcycle”, “truck”]` | Identifies the types of vehicles that are affected by the incident. | 
 
 
+#### alternative_routes{}: 
+| Header key | Example | Purpose |
+|---|---|---|
+| `vehicle_type` | `"car"` | Identifies the type of vehicle for which the route is intended. | 
+| `start_point` | `"Λ. Όχι"` | Indentifies the starting point of the rerouted trip. | 
+| `destination_point` | `"Περιφερειακή Οδός Θεσσαλονίκης"` | Indentifies the destination point of the rerouted trip. | 
+| `new_path` | `"('Λ. Όχι', 'Ελένης Ζωγράφου', 'Ολυμπιάδος', 'Αγίου Δημητρίου', 'Κατσιμίδη', 'Λ. Κυριακίδη', 'Περιφερειακή Οδός Θεσσαλονίκης')"` | Indentifies the alternative path proposed for this trip and vehicle type. | 
 
 ## How to use this
 
