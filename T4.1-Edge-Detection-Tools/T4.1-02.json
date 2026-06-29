@@ -1,0 +1,20 @@
+{
+  "header": {
+    "project-id": "iDriving",
+    "use-case-id": "UC1.1",
+    "contentType": "application/json",
+    "message-type": "uc1.1_vehicle_count",
+    "producer-id": "CERTH",
+    "correlation-id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "message-timestamp": "2026-03-02T22:12:41.117082+00:00"
+  },
+  "body": {
+    "topicName": "idriving_certh_countcars_detectiontool_uc1.1",
+    "frameID": 150,
+    "counts": {
+      "vehicles": 12,
+      "motorbikes": 0,
+      "total": 12
+    }
+  }
+}
