@@ -76,16 +76,4 @@ One entry per exported frame.
 
 ---
 
-## Heartbeat
-
-**Topic:** `idriving.heartbeat.certh.detect_violation` — sent every 30 s with `--kafka`.
-
-| Field | Example | Purpose |
-|-------|---------|---------|
-| `component_id` | `idriving.heartbeat.certh.detect_violation` | Component identifier |
-| `timestamp` | `2026-03-02T22:12:41.117082+00:00` | UTC timestamp (ISO 8601) |
-| `status` | `UP` | Health status |
-| `version` | `1.0.0` | Tool version |
-
----
 
