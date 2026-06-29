@@ -1,0 +1,83 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "\"UC1.1\"",
+        "contentType": "application/json",
+        "message-type": "violation",
+        "producer-id": "idriving",
+        "correlation-id": "1ef9d1e0-91fd-47a2-bd96-3be46d69b4bf",
+        "message-timestamp": "2026-01-20T15:23:59.882539+00:00"
+      },
+      "body": {
+	  "alerts": [
+	    {
+	      "label": "Congestion on Wickenburggasse",
+	      "metric": "veh/h",
+	      "status": "predicted",
+	      "user_type": "car",
+	      "location": [
+		0.0,
+		0.0
+	      ],
+	      "time_window": 600,
+	      "number_event": 8,
+	      "priority": 10,
+	      "start_time": "2026-02-14T00:45:16.871516Z",
+	      "end_time": "2026-02-14T01:44:16.871516Z",
+	      "road_name": "Wickenburggasse"
+	    },
+	    {
+	      "label": "Congestion on Wickenburggasse",
+	      "metric": "veh/h",
+	      "status": "predicted",
+	      "user_type": "car",
+	      "location": [
+		0.0,
+		0.0
+	      ],
+	      "time_window": 600,
+	      "number_event": 8,
+	      "priority": 10,
+	      "start_time": "2026-02-14T00:45:16.871516Z",
+	      "end_time": "2026-02-14T01:44:16.871516Z",
+	      "road_name": "Wickenburggasse"
+	    },
+	    {
+	      "label": "Congestion on -196599558#0",
+	      "metric": "veh/h",
+	      "status": "predicted",
+	      "user_type": "car",
+	      "location": [
+		0.0,
+		0.0
+	      ],
+	      "time_window": 600,
+	      "number_event": 6,
+	      "priority": 10,
+	      "start_time": "2026-02-14T00:45:16.871516Z",
+	      "end_time": "2026-02-14T01:44:16.871516Z",
+	      "road_name": "-196599558#0"
+	    },
+	    {
+	      "label": "Congestion on Wickenburggasse",
+	      "metric": "veh/h",
+	      "status": "predicted",
+	      "user_type": "car",
+	      "location": [
+		0.0,
+		0.0
+	      ],
+	      "time_window": 600,
+	      "number_event": 6,
+	      "priority": 10,
+	      "start_time": "2026-02-14T00:45:16.871516Z",
+	      "end_time": "2026-02-14T01:44:16.871516Z",
+	      "road_name": "Wickenburggasse"
+	    }
+	  ]
+	}
+      }
+   ]
+}
