@@ -1,0 +1,35 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC1.2",
+        "contentType": "application/json",
+        "message-type": "idriving_certh_uc1.2_illegal_parking_detection",
+        "producer-id": "CERTH",
+        "correlation-id": "cb5469d6-6708-47bd-b7a6-9ef49aa7ff98",
+        "message-timestamp": "2026-06-29T12:25:54.561204Z"
+      },
+      "body": {
+        "detection_list": [
+          {
+            "topicName": "idriving_certh_object_detection_uc1.2",
+            "frameID": 144,
+            "imageURL": "",
+            "detections": [
+              {
+                "objectID": 1,
+                "class": "Vehicle",
+                "vehicle_conf": "84.5%",
+                "violation": true,
+                "condition": "Illegal Parking",
+                "violation_conf": "22.8%",
+                "license_plate": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
