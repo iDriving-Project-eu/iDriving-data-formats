@@ -1,0 +1,35 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "UC1.2",
+        "contentType": "application/json",
+        "message-type": "idriving_certh_object_detection_uc1.2",
+        "producer-id": "CERTH",
+        "correlation-id": "ca4da452-07eb-4916-8929-1c9ec2ff4071",
+        "message-timestamp": "2026-03-05T08:51:48.422206+00:00"
+      },
+      "body": {
+        "detection_list": [
+          {
+            "topicName": "idriving_certh_object_detection_uc1.2",
+            "frameID": 602,
+            "imageURL": "sign_occlusion_2026-3-5_10:51:30/frames/frame_000602.jpg",
+            "detections": [
+              {
+                "objectID": 1,
+                "class": "Vehicle",
+                "vehicle_conf": "94.9%",
+                "violation_conf": "100.0%",
+                "violation": true,
+                "condition": "sign obstruction",
+                "license_plate": "ZIA-5163"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
