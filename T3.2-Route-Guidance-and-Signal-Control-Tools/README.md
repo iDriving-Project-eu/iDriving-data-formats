@@ -10,6 +10,8 @@ header/topic conventions every message should follow.
 
 The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json). The one for the signal control tool is [`T3.2_02.json`](T3.2_02.json). The included information and tags are described below. 
 
+## Route Guidance Tool
+
 ### Kafka message headers
 
 | Header key | Example | Purpose |
@@ -22,7 +24,7 @@ The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json). The o
 | `message-timestamp` | `2026-05-19T08:30:00Z` | Producer-side UTC timestamp of the message. |
 | `content-type` | `application/json` | Declares the payload format. |
 
-### Record contents: 
+### Body 
 
 #### alert_info{}: 
 | Header key | Example | Purpose |
@@ -41,6 +43,23 @@ The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json). The o
 | `start_point` | `"Λ. Όχι"` | Indentifies the starting point of the rerouted trip. | 
 | `destination_point` | `"Περιφερειακή Οδός Θεσσαλονίκης"` | Indentifies the destination point of the rerouted trip. | 
 | `new_path` | `"('Λ. Όχι', 'Ελένης Ζωγράφου', 'Ολυμπιάδος', 'Αγίου Δημητρίου', 'Κατσιμίδη', 'Λ. Κυριακίδη', 'Περιφερειακή Οδός Θεσσαλονίκης')"` | Indentifies the alternative path proposed for this trip and vehicle type. | 
+
+
+
+## Signal Control Tool
+
+### Body 
+
+#### signals{}:  
+| Header key | Example | Purpose |
+|---|---|---|
+| `<n>` | `0` | Identifies the signalized intersection for which the signal plan is computed (n: internal ID) | 
+| `signal_id` | `"redlight1"` | Indentifies a specific traffic stream (connection of upstream-downstream edges) of the intersection which is controlled by one traffic light (e.g. stream North to South). | 
+| `red` | `60` | Indentifies the total red time of the stream (in seconds) during one cycle. | 
+| `green` | `30` | Indentifies the total green time of the stream (in seconds) during one cycle.  | 
+
+
+
 
 ## How to use this
 
