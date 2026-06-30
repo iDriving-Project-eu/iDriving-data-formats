@@ -3,12 +3,7 @@
 **Lead partner:** MBL
 **iDriving components:** IC2, IC3
 
-See the [`_example/`](../_example) folder for a generic representative payload and the
-header/topic conventions every message should follow.
-
-
-
-The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json). The one for the signal control tool is [`T3.2_02.json`](T3.2_02.json). The included information and tags are described below. 
+The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json). The one for the signal control tool is [`T3.2_02.json`](T3.2_02.json). The included information and header keys with example values are described below. 
 
 ## Route Guidance Tool
 
@@ -54,7 +49,7 @@ The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json). The o
 | Header key | Example | Purpose |
 |---|---|---|
 | `<n>` | `0` | Identifies the signalized intersection for which the signal plan is computed (n: internal ID) | 
-| `signal_id` | `"redlight1"` | Indentifies a specific traffic stream (connection of upstream-downstream edges) of the intersection which is controlled by one traffic light (e.g. stream North to South). | 
+| `signal_id` | `"redlight1"` | Indentifies a specific traffic stream (connection of upstream-downstream edges) of the intersection which is controlled by one traffic light (e.g. stream from North to South). | 
 | `red` | `60` | Indentifies the total red time of the stream (in seconds) during one cycle. | 
 | `green` | `30` | Indentifies the total green time of the stream (in seconds) during one cycle.  | 
 
