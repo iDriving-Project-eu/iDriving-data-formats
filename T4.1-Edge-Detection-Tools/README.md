@@ -142,7 +142,6 @@ Combines YOLOv8 bike-lane segmentation + vehicle detection + ByteTrack. Flags ve
 Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
 
 **Topic (T4.1-03):** `idriving_certh_object_detection_uc1.2`  
-**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
 
 ##### Kafka headers & `records[].header`
 
@@ -205,7 +204,6 @@ Detects vehicles (YOLO + ByteTrack), compares each vehicle bbox against a user-d
 Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
 
 **Topic (T4.1-04):** `idriving_certh_object_detection_uc1.2`  
-**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
 
 ##### Kafka headers & `records[].header`
 
@@ -272,7 +270,6 @@ Detects cyclists and motorcyclists (YOLO + ByteTrack) and flags helmet and mobil
 Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
 
 **Topic (T4.1-05):** `idriving_certh_object_detection_uc1.2`  
-**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
 
 ##### Kafka headers & `records[].header`
 
@@ -339,7 +336,6 @@ Detects cyclists (YOLO + ByteTrack), checks helmet status, and analyses upper-bo
 Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
 
 **Topic (T4.1-06):** `idriving_certh_object_tracking_uc1.2`  
-**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
 
 ##### Kafka headers & `records[].header`
 
@@ -405,7 +401,6 @@ Detects and tracks road users (Vehicle, Pedestrian, Cyclist via YOLO + ByteTrack
 Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
 
 **Topic (T4.1-07):** `idriving_certh_object_tracking_uc1.2`  
-**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
 
 ##### Kafka headers & `records[].header`
 
@@ -471,7 +466,6 @@ Detects road vehicles from drone or ground camera feed (YOLOv11 + ByteTrack) and
 #### Message envelope
 
 **Topic (T4.1-09):** `idriving_certh_object_detection_uc2.1`  
-**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
 
 Payload: top-level `header` + `body` (not wrapped in `records[]`).
 
@@ -549,7 +543,6 @@ Detects road obstacles from drone imagery (YOLO11) and publishes Kafka messages 
 Each Kafka message has **transport headers** (in Kafka headers, not in the JSON body) and a **JSON payload** with a `records[]` array. Each record has `header` + `body`.
 
 **Topic (T4.1-08):** `idriving_certh_object_detection_uc2.2`  
-**Pattern:** `idriving_<owner>_<purpose>_uc<X.Y>`
 
 ##### Kafka headers & `records[].header`
 
