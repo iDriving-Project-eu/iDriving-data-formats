@@ -8,7 +8,7 @@ header/topic conventions every message should follow.
 
 
 
-The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json). 
+The payload for the route guidance tool is [`T3.2_01.json`](T3.2_01.json). The one for the signal control tool is [`T3.2_02.json`](T3.2_02.json). The included information and tags are described below. 
 
 ### Kafka message headers
 
