@@ -1,0 +1,25 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "\"UC1.1\"",
+        "contentType": "application/json",
+        "message-type": "rerouting",
+        "producer-id": "idriving",
+        "correlation-id": "1ef9d1e0-91fd-47a2-bd96-3be46d69b4bf",
+        "message-timestamp": "2026-01-20T15:23:59.882539+00:00"
+      },
+      "body": {	 
+	    "signals":[
+		 {
+		    "signal_id":"redlight1",
+		    "red": 60,
+		    "green": 30
+		}
+	    ]
+	 }
+      }
+    
+  ]
+}

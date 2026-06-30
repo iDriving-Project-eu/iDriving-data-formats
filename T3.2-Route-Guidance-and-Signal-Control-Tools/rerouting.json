@@ -1,0 +1,89 @@
+{
+  "records": [
+    {
+      "header": {
+        "project-id": "iDriving",
+        "use-case-id": "\"UC1.1\"",
+        "contentType": "application/json",
+        "message-type": "rerouting",
+        "producer-id": "idriving",
+        "correlation-id": "1ef9d1e0-91fd-47a2-bd96-3be46d69b4bf",
+        "message-timestamp": "2026-01-20T15:23:59.882539+00:00"
+      },
+      "body": {
+	    "route_recom": {
+		"generated alerts": "Attention! Congestion in Kaiser-Franz-Josef-Kai. Delays expected. Take Kalvariengürtel and Bahnhofgürtel, instead."
+	    },
+	    "alert_info": {
+		"type": "congestion",
+		"notes": "Kaiser-Franz-Josef-Kai",
+		"startTime": 23700,
+		"duration": 3600,
+		"coordinates": [],
+		"linkClosure": true,
+		"OppDirClosure": false,
+		"AdditionalClosureLinkIDs": [],
+		"vehTypes": [
+		    "car",
+		    "motorcycle",
+		    "truck"
+		],
+		"level": "high",
+		"baseAltRoad": "alt_road_to_define",
+		"EmergencyVehicles_Locations": [
+		    "Sporgasse"
+		]
+	    },
+	    "ev_route": [
+		{
+		    "veh_type": "emergency",
+		    "veh_ID": "ev_0_23701.0",
+		    "start_edge": "Sporgasse",
+		    "destination_edge": "Wickenburggasse",
+		    "fastest_route": "('Sporgasse', 'Paulustorgasse', 'Maria-Theresia-Allee', 'Bergmanngasse', 'Humboldtstraße', 'Wickenburggasse')",
+		    "null": "117.46892285636184"
+		}
+	    ],
+	    "rerouted trips": [
+		{
+		    "vehicle type": "car",
+		    "veh ID": "t1801",
+		    "new_path": "('Körösistraße', 'Wickenburggasse', 'Jahngasse', 'Parkstraße', 'Glacisstraße', 'Wilhelm-Fischer-Allee', 'Burgring', 'Opernring', 'Joanneumring', 'Radetzkystraße', 'Marburger Kai', nan, 'Neutorgasse', 'Erzherzog-Johann-Brücke')",
+		    "old_path": "()"
+		},
+		{
+		    "vehicle type": "car",
+		    "veh ID": "t1901",
+		    "new_path": "('Wickenburggasse', 'Keplerbrücke', 'Lendkai')",
+		    "old_path": "()"
+		},
+		{
+		    "vehicle type": "motorcycle",
+		    "veh ID": "t1902",
+		    "new_path": "('Körösistraße', 'Wickenburggasse', 'Jahngasse', 'Parkstraße', 'Glacisstraße', 'Wilhelm-Fischer-Allee', 'Burgring', 'Opernring', 'Joanneumring', 'Radetzkystraße', 'Marburger Kai', nan, 'Neutorgasse', 'Erzherzog-Johann-Brücke')",
+		    "old_path": "()"
+		},
+		{
+		    "vehicle type": "motorcycle",
+		    "veh ID": "t1903",
+		    "new_path": "('Wickenburggasse', 'Keplerbrücke', 'Lendkai')",
+		    "old_path": "()"
+		},
+		{
+		    "vehicle type": "truck",
+		    "veh ID": "t1904",
+		    "new_path": "('Körösistraße', 'Wickenburggasse', 'Jahngasse', 'Parkstraße', 'Glacisstraße', 'Wilhelm-Fischer-Allee', 'Burgring', 'Opernring', 'Joanneumring', 'Radetzkystraße', 'Marburger Kai', nan, 'Neutorgasse', 'Erzherzog-Johann-Brücke')",
+		    "old_path": "()"
+		},
+		{
+		    "vehicle type": "truck",
+		    "veh ID": "t1905",
+		    "new_path": "('Wickenburggasse', 'Keplerbrücke', 'Lendkai')",
+		    "old_path": "()"
+		}
+	    ]
+	}
+      }
+    
+  ]
+}
